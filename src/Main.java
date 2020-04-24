@@ -72,8 +72,10 @@ public class Main {
 			System.out.println("4. HashMap de JCF.");
 			try {
 				mapType = Integer.valueOf(scan.nextLine());
-				if (mapType > 0 && mapType < 3) {
+				if (mapType > 0 && mapType < 5) {
 					isCorrect = true;
+				} else {
+					System.out.println("Ingrese un numero valido");
 				}
 			} catch (Exception e) {
 				System.out.println("Ingrese un numero valido");
@@ -99,7 +101,7 @@ public class Main {
 			fileName = "text.txt";
 		}
 		/**
-		 * Se lee el archivo de texto
+		 * Se leen los archivos de texto
 		 */
         ArrayList<String> listDictionary = textReader("Spanish.txt");
         ArrayList<String> sentences = textReader(fileName);
@@ -108,6 +110,7 @@ public class Main {
          */
         MapFactory<String, String> mapFactory = new MapFactory<>();
         /**
+		 * Estructuras de datos
          * Se obtiene la implementacion de mapa del factory segun lo elegido por el usuario
 		 * Se crea una lista de oraciones con la lista de palabras.
          */
@@ -119,15 +122,16 @@ public class Main {
 		 */
         String[] traductions = new String[2];
 		for (String enAndSpa : listDictionary) {
-			traductions[0] = enAndSpa.split(",")[0].replaceAll(" ", "");
-            traductions[1] = enAndSpa.split(",")[1].replaceAll(" ", "");
-            //TODO: Separar bien las lineas
-			map.put(traductions[0].toLowerCase(), traductions[1]);
+			if (enAndSpa.indexOf("#") == -1) {
+				traductions[0] = enAndSpa.split("\t")[0];
+				traductions[1] = enAndSpa.split("\t")[1].split(",")[0];
+				//TODO: quitar todo lo demas
+				map.put(traductions[0].toLowerCase(), traductions[1]);
+			}
 		}
 		/**
 		 * Se agregan las palabras a la lista de oraciones tambien como asociaciones
 		 */
-        
         Association<String, String> node;
 		int contSentence = 0;
 		for (String sentence : sentences) {
