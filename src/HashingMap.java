@@ -1,13 +1,7 @@
 import java.util.Collection;
 import java.util.Set;
 
-public class HashMap<K extends Comparable<K>, V> implements Map<K, V> {
-
-    @Override
-    public V put(K key, V value) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+public class HashingMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     @Override
     public int size() {
@@ -22,9 +16,21 @@ public class HashMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     @Override
+    public boolean containsKey(Object key) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
     public boolean containsValue(Object value) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public V get(Object key) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
@@ -64,15 +70,21 @@ public class HashMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     @Override
-    public boolean containsKey(Object key) {
+    public V put(K key, V value) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean containsKey(K key) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public V get(Object key) {
+    public V get(K key) {
         // TODO Auto-generated method stub
         return null;
     }
-
+    
 }

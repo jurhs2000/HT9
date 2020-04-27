@@ -67,7 +67,7 @@ public class Main {
 		while (!isCorrect) {
 			System.out.println("Ingrese la implementacion de Map que desea usar:");
 			System.out.println("1. SplayTree");
-			System.out.println("2. HashMap.");
+			System.out.println("2. HashingMap.");
 			System.out.println("3. TreeMap de JCF");
 			System.out.println("4. HashMap de JCF.");
 			try {

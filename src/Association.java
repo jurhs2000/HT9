@@ -5,9 +5,10 @@
  * Sus genericos K, V denotan la llave y el valor
  * La llave se compromete a ser comparable e implementar compareTo
  * La clase Association tambien se ccompromete a ser comparable
- * Esto para poder ser implementada en el arbol binario
+ * Esto para poder ser implementada y ser comparada en si misma
  */
-public class Association<K extends Comparable<K>, V> implements Comparable<Association<K, V>> {
+public class Association<K extends Comparable<K>, V> implements Comparable<Association<K, V>>,
+                                                                java.lang.Cloneable {
 
     protected K key;
     protected V value;
@@ -41,6 +42,13 @@ public class Association<K extends Comparable<K>, V> implements Comparable<Assoc
      */
     public V setValue(V v) {
         return value = v; //TODO: see if return the old or new value
+    }
+
+    /**
+     * @param k del tipo generico K, setea una nueva llave
+     */
+    public K setKey(K k) {
+        return key = k;
     }
 
     /**

@@ -22,7 +22,7 @@ public class MapFactory<K extends Comparable<K>, V> {
             case 1:
                 return new SplayTree<K, V>();
             case 2:
-                return new HashMap<K, V>();
+                return new HashingMap<K, V>();
             case 3:
                 return new java.util.TreeMap<K, V>();
             case 4:
