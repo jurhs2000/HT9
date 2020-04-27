@@ -11,7 +11,7 @@
  * Uso de patrón Factory.
  * 
  * @author Julio Herrera 19402
- * @author Daniela Batz 19
+ * @author Daniela Batz 19214
  * @version 1.0
  */
 import java.io.BufferedReader;
