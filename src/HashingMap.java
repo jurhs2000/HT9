@@ -1,7 +1,39 @@
+import java.util.HashMap;
+import java.util.List;
 import java.util.Collection;
 import java.util.Set;
+/**
+* @author Daniela Batz 19214
+*/
 
 public class HashingMap<K extends Comparable<K>, V> implements Map<K, V> {
+
+	private HashMap<K, V> stringMap=new HashMap<>();
+    public boolean valor;
+	
+	
+
+    @Override
+    public V put(K key, V value) {
+    	return stringMap.put(key, value);
+    }
+
+    @Override
+    public boolean containsKey(K key) {
+		return stringMap.containsKey(key);
+    }
+
+    @Override
+    public V get(K key) {
+        valor = stringMap.containsKey(key);
+    	if (valor==true){
+    		Association<K, V> word = new Association<K, V>(key, null);
+    		word.setValue(stringMap.get(key));
+    		return word.getValue();
+    	}else {
+    		return null;
+    	}
+	}
 
     @Override
     public int size() {
@@ -17,8 +49,7 @@ public class HashingMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     @Override
     public boolean containsKey(Object key) {
-        // TODO Auto-generated method stub
-        return false;
+        return stringMap.containsKey(key);
     }
 
     @Override
@@ -29,8 +60,7 @@ public class HashingMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     @Override
     public V get(Object key) {
-        // TODO Auto-generated method stub
-        return null;
+        return stringMap.get(key);
     }
 
     @Override
@@ -65,24 +95,6 @@ public class HashingMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     @Override
     public Set<java.util.Map.Entry<K, V>> entrySet() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public V put(K key, V value) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public boolean containsKey(K key) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public V get(K key) {
         // TODO Auto-generated method stub
         return null;
     }

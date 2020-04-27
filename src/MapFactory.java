@@ -14,7 +14,6 @@ public class MapFactory<K extends Comparable<K>, V> {
      * 1. SplayTree
      * 2. HashMap
      * 3. TreeMap de JCF
-     * 4. HashMap de JCF
      * 
      * @param mapType el numero elegido
      * @return Un Map ya que es la interfaz comun entre estas clases
@@ -27,8 +26,6 @@ public class MapFactory<K extends Comparable<K>, V> {
                 return new HashingMap<K, V>();
             case 3:
                 return new java.util.TreeMap<K, V>();
-            case 4:
-                return new java.util.HashMap<K, V>();
             default:
                 return null;
         }
