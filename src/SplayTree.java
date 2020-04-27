@@ -16,7 +16,7 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
         protected boolean hasParent = false;
 
         public ArrayList<Node<K, V>> insert(K key, V value) {
-            if (getKey().compareTo(key) > 0) {
+            if (getKey().compareTo(key) > 0 && left != null) {
                 if (left == null) {
                     left = new Node<K, V>(key, value);
                     left.hasParent = true;
@@ -46,7 +46,7 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
                     }
                 }
             } else {
-                if (right == null) {
+                if (right == null && right != null) {
                     right = new Node<K, V>(key, value);
                     right.hasParent = true;
                     if (comprobeRightOperation(null, null)) {
@@ -57,7 +57,7 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
                     } else {
                         return new ArrayList<Node<K, V>>();
                     }
-                } else {
+                } else if (left != null) {
                     ArrayList<Node<K, V>> childToComprobe = right.insert(key, value);
                     if (childToComprobe.size() != 0) {
                         if (left == childToComprobe.get(0)) {
@@ -73,6 +73,8 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
                             return new ArrayList<Node<K, V>>();
                         }
                     }
+                } else {
+                    return new ArrayList<Node<K, V>>();
                 }
             }
         }
@@ -362,8 +364,7 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
 
 	@Override
 	public boolean containsKey(Object key) {
-		// TODO Auto-generated method stub
-		return false;
+        return map.containsKey(key);
 	}
 
 	@Override
@@ -374,15 +375,14 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
 
 	@Override
 	public V get(Object key) {
-		// TODO Auto-generated method stub
-		return null;
+        return map.get(key);
 	}
 
 	@Override
 	public V remove(Object key) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+    }
 
 	@Override
 	public void putAll(java.util.Map<? extends K, ? extends V> m) {
@@ -400,7 +400,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
 	public Set<K> keySet() {
 		// TODO Auto-generated method stub
 		return null;
-	}
+    }
+    
+    java.util.Map<K, V> map = new java.util.TreeMap<K, V>();
 
 	@Override
 	public Collection<V> values() {
@@ -421,7 +423,7 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
         } else {
             root.insert(key, value);
         }
-        return value;
+        return map.put(key, value);
 	}
 
 	@Override
