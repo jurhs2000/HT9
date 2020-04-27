@@ -1,5 +1,5 @@
 /**
- * UVG - ADT - HT8
+ * UVG - ADT - HT9
  * 
  * Implementacion de patron Factory para decidir si utilizar el 
  * Mapeo de HashMap o el SplayTree de TreeMap.
@@ -13,6 +13,8 @@ public class MapFactory<K extends Comparable<K>, V> {
      * Devuelve el map elegido segun el parametro.
      * 1. SplayTree
      * 2. HashMap
+     * 3. TreeMap de JCF
+     * 4. HashMap de JCF
      * 
      * @param mapType el numero elegido
      * @return Un Map ya que es la interfaz comun entre estas clases

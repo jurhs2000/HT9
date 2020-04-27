@@ -1,10 +1,34 @@
-import java.lang.reflect.Array;
+/**
+ * Binary Search Tree - SplayTree
+ * Define los metodos Zig, Zag, ZigZag, ZagZig, ZigZig y ZagZag.
+ * Implementa los metodos de la clase Map para ser parte de ellos y ser usado en el Factory.
+ * Contiene un nodo Root que deriva los demas nodos left, right.
+ * 
+ * Referencias de:
+ * Bailey Duane A. (2007). Data Structures in Java for the Principled Programmer. Williams College
+ * 
+ * Josh Israel. SplayBST.java from: https://algs4.cs.princeton.edu/33balanced/SplayBST.java.html
+ * 
+ * Sanfoundry. Java Program to Implement Splay Tree.
+ * from: https://www.sanfoundry.com/java-program-implement-splay-tree/
+ * 
+ * Danny Sleator. Implements a top-down splay tree.
+ * from: https://www.link.cs.cmu.edu/splay/download/SplayTree.java
+ * 
+ * @author Julio Herrera
+ */
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
 public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
 
+    /**
+     * El nodo extiende de la Associacion no por necesida, sino por conveniencia
+     * Para obtener todos los metodos de get y set de llave y valor.
+     * @param <K> Llave
+     * @param <V> Valor
+     */
     class Node<K extends Comparable<K>, V> extends Association<K, V> {
 
         public Node(K key, V value) {
@@ -15,6 +39,14 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
         protected Node<K, V> left, right;
         protected boolean hasParent = false;
 
+        /**
+         * Decide a que lado del nodo va a insertar, derecha o izquierda
+         * asi como los metodos zig zag que se pueden dar.
+         * 
+         * @param key
+         * @param value
+         * @return
+         */
         public ArrayList<Node<K, V>> insert(K key, V value) {
             if (getKey().compareTo(key) > 0 && left != null) {
                 if (left == null) {
@@ -79,6 +111,12 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             }
         }
 
+        /**
+         * Comprueba cual hijo es el que se comprueba para saber que zig zag hacer.
+         * Determina si un hijo tiene padre para regresar y comprobar de nuevo mediante el.
+         * @param childToComprobe hijo de un nodo para comprobar
+         * @param childChildToComprobe nieto de un nodo para comprobar
+         */
         private boolean comprobeLeftOperation(Node<K, V> childToComprobe, Node<K, V> childChildToComprobe) {
             if (childToComprobe != null) {
                 if (childToComprobe.left != null) {
@@ -102,6 +140,12 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             }
         }
 
+        /**
+         * Comprueba cual hijo es el que se comprueba para saber que zig zag hacer.
+         * Determina si un hijo tiene padre para regresar y comprobar de nuevo mediante el.
+         * @param childToComprobe hijo de un nodo para comprobar
+         * @param childChildToComprobe nieto de un nodo para comprobar
+         */
         private boolean comprobeRightOperation(Node<K, V> childToComprobe, Node<K, V> childChildToComprobe) {
             if (childToComprobe != null) {
                 if (childToComprobe.left != null) {
@@ -125,6 +169,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             }
         }
 
+        /**
+         * Metodo de la rotacion Zig
+         */
         public void zig() {
             if (right == null) {
                 right = new Node<>(getKey(), getValue());
@@ -148,6 +195,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             left = left.left;
         }
 
+        /**
+         * Metodo de la rotacion Zag
+         */
         public void zag() {
             if (left == null) {
                 left = new Node<>(getKey(), getValue());
@@ -171,6 +221,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             right = right.right;
         }
 
+        /**
+         * Metodo de la rotacion ZigZag
+         */
         public void zigzag() {
             if (right == null) {
                 right = new Node<>(getKey(), getValue());
@@ -194,6 +247,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             left.right = left.right.left;
         }
 
+        /**
+         * Metodo de la rotacion ZagZig
+         */
         public void zagzig() {
             if (left == null) {
                 left = new Node<>(getKey(), getValue());
@@ -217,6 +273,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             right.left = right.left.right;
         }
 
+        /**
+         * Metodo de la rotacion ZigZig
+         */
         public void zigzig() {
             if (right == null) {
                 right = new Node<>(left.getKey(), left.getValue());
@@ -261,6 +320,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             left = left.left.left;
         }
 
+        /**
+         * Metodo de la rotacion ZagZag
+         */
         public void zagzag() {
             if (left == null) {
                 left = new Node<>(right.getKey(), right.getValue());
@@ -305,6 +367,11 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             right = right.right.right;
         }
 
+        /**
+         * Comprueba dentro si se contiene la llave
+         * @param key llave
+         * @return true si existe
+         */
         public boolean containsKey(K key) {
             if (getKey().compareTo(key) == 0) {
                 return true;
@@ -321,39 +388,40 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
             return false;
         }
 
-        public V getValueByKey(K key) {
+        /**
+         * Devuelve el valor de la llave seleccionada
+         * @param key Llave
+         * @return El objeto de tivo V
+         */
+        public V get(K key) {
             if (getKey().compareTo(key) == 0) {
                 return getValue();
             }
             if (getKey().compareTo(key) > 0) {
                 if (left != null) {
-                    return left.getValueByKey(key);
+                    return left.get(key);
                 }
             } else if (getKey().compareTo(key) < 0) {
                 if (right != null) {
-                    return right.getValueByKey(key);
+                    return right.get(key);
                 }
             }
             return null;
         }
 
-        public void printInOrder() {
-            if (left != null) {
-                left.printInOrder();
-            }
-            if (right != null) {
-                right.printInOrder();
-            }
-        }
-
     }
 
+    /**
+     * Nodo raiz
+     */
     private Node<K, V> root;
 
+    /**
+     * Para obtener el tamaño del mapa
+     */
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+        return map.size();
 	}
 
 	@Override
@@ -362,6 +430,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
 		return false;
 	}
 
+    /**
+     * Para verificar si el mapa contiene la llave
+     */
 	@Override
 	public boolean containsKey(Object key) {
         return map.containsKey(key);
@@ -373,6 +444,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
 		return false;
 	}
 
+    /**
+     * Para obtener el valor de una llave
+     */
 	@Override
 	public V get(Object key) {
         return map.get(key);
@@ -385,23 +459,11 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
 	@Override
-	public void putAll(java.util.Map<? extends K, ? extends V> m) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public Set<K> keySet() {
 		// TODO Auto-generated method stub
 		return null;
     }
-    
+
     java.util.Map<K, V> map = new java.util.TreeMap<K, V>();
 
 	@Override
@@ -416,6 +478,9 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
 		return null;
     }
 
+    /**
+     * Inserta en el nodo
+     */
 	@Override
 	public V put(K key, V value) {
 		if (root == null) {
@@ -426,18 +491,33 @@ public class SplayTree<K extends Comparable<K>, V> implements Map<K, V> {
         return map.put(key, value);
 	}
 
+    /**
+     * Para verificar si el mapa contiene un llave
+     */
 	@Override
 	public boolean containsKey(K key) {
-		return root.containsKey(key);
+		return map.containsKey(key);
+	}
+
+    /**
+     * Para obtener el valor de una llave
+     */
+	@Override
+	public V get(K key) {
+        return map.get(key);
+    }
+    
+
+	@Override
+	public void putAll(java.util.Map<? extends K, ? extends V> m) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public V get(K key) {
-        return root.getValueByKey(key);
+	public void clear() {
+		// TODO Auto-generated method stub
+		
 	}
-    
-    public void printInOrder() {
-        root.printInOrder();
-    }
 
 }

@@ -6,6 +6,9 @@
  * La llave se compromete a ser comparable e implementar compareTo
  * La clase Association tambien se ccompromete a ser comparable
  * Esto para poder ser implementada y ser comparada en si misma
+ * 
+ * Recuperada de HT7
+ * Se agrego clonable para poder clonar nodos sin la referencia
  */
 public class Association<K extends Comparable<K>, V> implements Comparable<Association<K, V>>,
                                                                 java.lang.Cloneable {

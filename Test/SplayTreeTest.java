@@ -1,50 +1,56 @@
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
 /**
- *
- * @author Daniela Batz 19214
- * @author Julio Herrera 19402
+ * @author Julio Herrera
+ * @author Daniela Batz
+ * 
+ * Prueba unitaria de la clase SplayTree
  */
+import static org.junit.Assert.*;
+import org.junit.Test;
+
 public class SplayTreeTest {
-    
-    public SplayTreeTest() {
-    }
+
     /**
-     * Test of contains method, of class SplayTree.
+     * Con esta prueba verificaremos que jUnit este funcionando
      */
-    @Test
-    public void testContains() {
-        System.out.println("contains");
-        String es="perro";
-        String ing="dog";
-        System.out.println("put");
-        SplayTree instance = new SplayTree();
-        instance.put(ing, es);
-        boolean expResult=true;
-        boolean result = instance.contains(ing);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+	@Test
+    public void pruebaJUnit() {
+        assertTrue(true);
     }
 
     /**
-     * Test of put method, of class SplayTree.
+     * Prueba del insercion
      */
     @Test
-    public void testPut() {
-        String es="perro";
-        String ing="dog";
-        System.out.println("put");
-        SplayTree instance = new SplayTree();
-        instance.put(ing, es);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+    public void putTest() {
+        SplayTree<Integer, String> st = new SplayTree<>();
+        st.put(Integer.valueOf(8), "ocho");
+        st.put(Integer.valueOf(3), "tres");
+        st.put(Integer.valueOf(1), "uno");
+        assertEquals(st.size(), 3);
     }
     
+    /**
+     * Prueba para saber si existe un elemento por llave
+     */
+    @Test
+    public void containsKey() {
+        SplayTree<Integer, String> st = new SplayTree<>();
+        st.put(Integer.valueOf(8), "ocho");
+        st.put(Integer.valueOf(3), "tres");
+        st.put(Integer.valueOf(1), "uno");
+        assertTrue(st.containsKey(3));
+    }
     
+    /**
+     * Prueba para obtener un elemento
+     */
+    @Test
+    public void get() {
+        SplayTree<Integer, String> st = new SplayTree<>();
+        st.put(Integer.valueOf(8), "ocho");
+        st.put(Integer.valueOf(3), "tres");
+        st.put(Integer.valueOf(1), "uno");
+        assertEquals(st.get(3), "tres");
+    }
+
 }
